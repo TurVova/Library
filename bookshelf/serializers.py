@@ -1,12 +1,15 @@
-from bookshelf.models import User, Book
 from rest_framework import serializers
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+from bookshelf.models import User, Book
+
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'email',]
+        fields = ['id', 'email', 'is_active', 'is_staff', 'is_superuser']
 
-class BookSerializer(serializers.HyperlinkedModelSerializer):
+
+class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['url', 'title', 'author', 'status', 'user']
+        fields = ['id', 'title', 'author', 'status', 'user']

@@ -53,11 +53,8 @@ class Book(models.Model):
     status = models.BooleanField(default=True)
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return self.title
-
-
-@receiver(pre_save, sender=Book)
-def return_book(sender, instance, *args, **kwargs):
-    if instance.status:
-        instance.user = None
